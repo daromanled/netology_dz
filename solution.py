@@ -40,21 +40,21 @@ country = input('Введите страну, топ слов из новост�
 
 if country == 'France' or country == 'Франция':
 
-ten_words_from_news('newsfr.json')
+    ten_words_from_news('newsfr.json')
 
 elif country == 'Cypr' or country == 'Кипр':
 
-ten_words_from_news('newscy.json')
+    ten_words_from_news('newscy.json')
 
 elif country == 'Italy' or country == 'Италия':
 
-ten_words_from_news('newsit.json')
+    ten_words_from_news('newsit.json')
 
 elif country == 'Africa' or country == 'Африка':
 
-ten_words_from_news('newsafr.json')
+    ten_words_from_news('newsafr.json')
 
 else:
 
-print('Sorry, we have not got any information about this country')
+    print('Sorry, we have not got any information about this country')
 
