@@ -1,40 +1,43 @@
-import codecs
-
 import json
 
 def ten_words_from_news(country_news):
 
-Words = {}
-
-with codecs.open(country_news, encoding="utf-8") as news:
-
-    for news in json.load(news)['rss']['channel']['item']:
-
-       for word in news['description'].split():
-
-           f = True
-
-           for letter in word:
-
-               if letter not in 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm':
-
-                   f = False
-
-           if f == True:
-
-                if word in Words.keys():
-
-                    Words[word] += 1
-
-                else:
-
-                    Words[word] = 1
-
-Words = sorted(Words.items(), key=lambda x:x[1], reverse = True)
-
-for top_word in Words[:11]:
-
-    print(top_word[0])
+    Words = {}
+    
+    with open(country_news, encoding="iso8859_5") as news:
+    
+        for news in json.load(news)['rss']['channel']['item']:
+            
+            if country_news == 'newsit.json':
+                news_list = news['description'].split()
+            else:
+                news_list = news['description']['__cdata'].split()
+    
+            for word in news_list:
+    
+                f = True
+    
+                for letter in word:
+    
+                    if letter not in 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm':
+    
+                        f = False
+    
+                if f == True:
+    
+                    if word in Words.keys():
+    
+                        Words[word] += 1
+    
+                    else:
+    
+                        Words[word] = 1
+    
+    Words = sorted(Words.items(), key=lambda x:x[1], reverse = True)
+    
+    for top_word in Words[:11]:
+    
+        print(top_word[0])
 
 country = input('Введите страну, топ слов из новостей которой вам нужен:')
 
