@@ -1,10 +1,18 @@
 import json
+import chardet
+
+
+def code_detecter(filename):
+    with open(filename) as codefile:
+        data = codefile.readlines()
+    
+    return chardet.detect(''.join(data))['encoding']
 
 def ten_words_from_news(country_news):
 
     Words = {}
     
-    with open(country_news, encoding="iso8859_5") as news:
+    with open(country_news, encoding=code_detecter(country_news)) as news:
     
         for news in json.load(news)['rss']['channel']['item']:
             
@@ -23,7 +31,7 @@ def ten_words_from_news(country_news):
     
                         f = False
     
-                if f == True:
+                if f == True and len(word)>5:
     
                     if word in Words.keys():
     
@@ -35,7 +43,7 @@ def ten_words_from_news(country_news):
     
     Words = sorted(Words.items(), key=lambda x:x[1], reverse = True)
     
-    for top_word in Words[:11]:
+    for top_word in Words[:10]:
     
         print(top_word[0])
 
@@ -60,4 +68,3 @@ elif country == 'Africa' or country == 'Африка':
 else:
 
     print('Sorry, we have not got any information about this country')
-
